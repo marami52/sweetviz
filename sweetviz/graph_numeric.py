@@ -66,6 +66,9 @@ class GraphNumeric(sweetviz.graph.Graph):
             normalizing_weights = norm_source
 
         gap_percent = config["Graphs"].getfloat("summary_graph_categorical_gap")
+        
+        if self.num_bins is None:
+            _ , self.num_bins = np.histogram(plot_data, bins = 'auto')
 
         self.hist_specs = axs.hist(plot_data, weights = normalizing_weights, bins=self.num_bins, \
                                    rwidth = (100.0 - gap_percent) / 100.0)
